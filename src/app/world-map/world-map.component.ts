@@ -14,27 +14,26 @@ export class WorldMapComponent {
 
   constructor(private httpService: HttpService) {}
 
-  onSvgLoad(event) {
-    const svgObject = <HTMLObjectElement>event.target;
-    const svgDocument = svgObject.contentDocument;
+  onSvgLoad(event: Event) {
+    const svgObject: HTMLObjectElement = <HTMLObjectElement>event.target;
+    const svgDocument: Document = svgObject.contentDocument;
 
-    const paths = svgDocument.querySelectorAll('path');
+    const paths: NodeListOf<SVGPathElement> = svgDocument.querySelectorAll('path');
 
-    paths.forEach((path) => {
-      path.addEventListener('click', (event) => this.onCountryClick(event));
+    paths.forEach((path: SVGPathElement) => {
+      path.addEventListener('click', (event: MouseEvent) => this.onCountryClick(event));
     })
   }
 
-  onCountryClick(event) {
-    // console.log(event.target.getAttribute('title'));
-    this.countryId = event.target.getAttribute('id');
+  onCountryClick(event: MouseEvent) {
+    this.countryId = (event.target as HTMLElement).getAttribute('id');
 
     this.httpService.callAPI(this.countryId).subscribe(
       (response) => { this.displayInfo(response); },
       (error) => { console.log(error); });
   }
 
-  displayInfo(response) {
+  displayInfo(response: object) {
     this.info = response[1][0];
     console.log(this.info);
   }
