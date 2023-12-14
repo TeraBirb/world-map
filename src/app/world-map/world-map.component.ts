@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-world-map',
@@ -7,7 +8,11 @@ import { Component } from '@angular/core';
 })
 export class WorldMapComponent {
 
-  url = 'https://api.worldbank.org/V2/';
+  posts: object;
+  countryId: string;
+  info: object;
+
+  constructor(private httpService: HttpService) {}
 
   onSvgLoad(event) {
     const svgObject = <HTMLObjectElement>event.target;
@@ -16,11 +21,23 @@ export class WorldMapComponent {
     const paths = svgDocument.querySelectorAll('path');
 
     paths.forEach((path) => {
-      path.addEventListener('click', (event) => this.onPathClick(event));
+      path.addEventListener('click', (event) => this.onCountryClick(event));
     })
   }
 
-  onPathClick(event) {
-    console.log(event.target.getAttribute('title'));
+  onCountryClick(event) {
+    // console.log(event.target.getAttribute('title'));
+    this.countryId = event.target.getAttribute('id');
+
+    this.httpService.callAPI(this.countryId).subscribe(
+      (response) => { this.displayInfo(response); },
+      (error) => { console.log(error); });
   }
+
+  displayInfo(response) {
+    this.info = response[1][0];
+    console.log(this.info);
+  }
+
+
 }

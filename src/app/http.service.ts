@@ -11,6 +11,6 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   callAPI(countryId: string) {
-    return this.http.get(this.url + countryId);
+    return this.http.get(this.url + countryId + '?format=json');
   }
 }
