@@ -8,9 +8,15 @@ import { HttpService } from '../http.service';
 })
 export class WorldMapComponent {
 
-  posts: object;
-  countryId: string;
-  info: object;
+  // posts: object;
+  countryId: string = "";
+  info: any;
+  countryName: string = "";
+  capital: string = "";
+  region: string = "";
+  income: string = "";
+  longitude: string = "";
+  latitude: string = "";
 
   constructor(private httpService: HttpService) {}
 
@@ -33,9 +39,12 @@ export class WorldMapComponent {
       (error) => { console.log(error); });
   }
 
-  displayInfo(response: object) {
+  displayInfo(response: any) {
     this.info = response[1][0];
     console.log(this.info);
+    this.countryName = this.info.name;
+    this.capital = this.info.capitalCity;
+    
   }
 
 
