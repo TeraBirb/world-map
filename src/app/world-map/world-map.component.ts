@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, Renderer2, NgZone } from '@angular/core';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class WorldMapComponent {
   latitude: string = "";
   longitude: string = "";
 
-  constructor(private httpService: HttpService, private ngZone: NgZone) {}
+  constructor(private httpService: HttpService, private renderer: Renderer2, private ngZone: NgZone) {}
 
   onSvgLoad(event: Event) {
     const svgObject: HTMLObjectElement = <HTMLObjectElement>event.target;
@@ -27,6 +27,8 @@ export class WorldMapComponent {
 
     paths.forEach((path: SVGPathElement) => {
       path.addEventListener('click', (event: MouseEvent) => this.onCountryClick(event));
+      path.addEventListener('mouseenter', (event) => this.onMouseEnter(event));
+      path.addEventListener('mouseleave', (event) => this.onMouseLeave(event));
     })
   }
 
@@ -36,6 +38,14 @@ export class WorldMapComponent {
     this.httpService.setCountryInfo(this.countryId).subscribe(
       (response) => { this.displayInfo(response) },
       (error) => { console.log(error); });
+  }
+
+  onMouseEnter(event) {
+    this.renderer.setStyle(event.target, 'fill', 'firebrick');
+  }
+
+  onMouseLeave(event) {
+    this.renderer.setStyle(event.target, 'fill', 'black');
   }
 
   displayInfo(response) {
