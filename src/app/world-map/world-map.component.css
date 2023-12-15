@@ -4,6 +4,7 @@
     margin: 0 auto;
     padding: 0 5%;
     background-color:skyblue;
+
 }
 
 .map {
@@ -14,7 +15,15 @@
 .info {
     flex: 1;
 }
-/* 
-.country-highlight {
-    fill: red;
+
+/* screencapture gif */
+
+/* .map {
+    text-align: center;
+}
+
+.info {
+    position: absolute;
+    top: 50%;
+    left: 0;
 } */
