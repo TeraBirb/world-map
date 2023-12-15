@@ -1,7 +1,7 @@
 <div class="main-container">
 
   <div class="map">
-    <h2>World-Map Component</h2>
+    <h2>A Map of the World</h2>
     <object data='../assets/world-map.svg' type='image/svg+xml' (load)='onSvgLoad($event)'>
       <img src='../assets/world-map.svg' alt='world map image'>
       <p>There was an error loading the SVG file. Fallback with limited functionality.</p>
@@ -9,15 +9,15 @@
   </div>
 
   <div class="info">
-    <h4>Click any country for more info</h4>
+    <h4>Click a country to learn more about it</h4>
     <ul *ngIf='countryName !== "" '>
     <!-- <ul> -->
-      <li>Name: {{ countryName }}</li>
-      <li>Capital: {{ capital }}</li>
-      <li>Region: Subsaharan Africa</li>
-      <li>Income level: low income</li>
-      <li>Longitude: 123.412</li>
-      <li>Latitude: 123.312</li>
+      <li><strong>Name: </strong>{{ countryName }}</li>
+      <li><strong>Capital: </strong>{{ capital }}</li>
+      <li><strong>Region: </strong>{{ region }}</li>
+      <li><strong>Income level: </strong>{{ income }}</li>
+      <li><strong>Latitude: </strong>{{ latitude }}</li>
+      <li><strong>Longitude: </strong>{{ longitude }}</li>
     </ul>
   </div>
 

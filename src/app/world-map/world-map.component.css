@@ -1,17 +1,16 @@
 .main-container {
+    font-family:'Courier New', Courier, monospace;
     display: flex;
     margin: 0 auto;
-    background-color: beige;
     padding: 0 5%;
+    background-color:skyblue;
 }
 
 .map {
     flex: 5;
-    /* background-color: blueviolet; */
     text-align: center;
 }
 
 .info {
     flex: 1;
-    /* background-color: chocolate; */
 }
